@@ -10,7 +10,7 @@ import (
 type Product interface{}
 
 type ProducerParams interface {
-	Work() (interface{}, error)
+	Produce() (interface{}, error)
 	//Done()
 }
 
@@ -63,7 +63,7 @@ func NewWorkPool(producerNum int, cf func([]Product)) WorkPool {
 		fqp, _ := i.(ProducerParams)
 		//defer fqp.Done()
 
-		p, err := fqp.Work()
+		p, err := fqp.Produce()
 
 		if err != nil {
 			return
@@ -134,7 +134,7 @@ type MultiProducerParams struct {
 	//SouceData *[]map[string]string
 }
 
-func (mpp *MultiProducerParams) Work() (interface{}, error) {
+func (mpp *MultiProducerParams) Produce() (interface{}, error) {
 
 	return mpp.Begin, nil
 
